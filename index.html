@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PKF Club Grant Submission</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --gold: #c8902a;
+    --gold-light: #e8b84b;
+    --cream: #faf8f4;
+    --gray-100: #f4f4f2;
+    --gray-200: #e8e6e1;
+    --gray-400: #9a9690;
+    --gray-700: #3d3b37;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--gray-700);
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 0 0 60px;
+  }
+  .header {
+    background: var(--navy);
+    color: white;
+    padding: 32px 0 24px;
+    text-align: center;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+  }
+  .header p.sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .header-divider {
+    width: 48px; height: 2px;
+    background: var(--gold);
+    margin: 12px auto 0;
+  }
+  .tagline-band {
+    background: var(--gold);
+    color: var(--navy);
+    text-align: center;
+    padding: 9px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .intro-note {
+    background: white;
+    border-left: 4px solid var(--gold);
+    margin: 28px 0 0;
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--gray-700);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+  }
+  .section {
+    background: white;
+    margin-top: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .section-header {
+    background: var(--navy);
+    color: white;
+    padding: 11px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 12px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .section-body { padding: 22px; }
+  .form-row { display: grid; gap: 16px; margin-bottom: 16px; }
+  .form-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .form-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .form-row:last-child { margin-bottom: 0; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label {
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+  }
+  .field label .note {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 11px;
+    color: var(--gray-400);
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="number"],
+  textarea, select {
+    border: 1.5px solid var(--gray-200);
+    border-radius: 4px;
+    padding: 9px 12px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    color: var(--gray-700);
+    background: var(--gray-100);
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: white;
+  }
+  textarea { resize: vertical; min-height: 90px; }
+  .radio-group { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
+  .radio-group label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 400;
+    text-transform: none; letter-spacing: 0;
+    cursor: pointer; color: var(--gray-700);
+  }
+  input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; }
+  #director-section { display: none; }
+  #director-section.visible { display: block; margin-top: 16px; }
+  .cert-box {
+    background: var(--gray-100);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--gray-700);
+    margin-bottom: 20px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .sig-row { display: grid; grid-template-columns: 1fr 200px; gap: 16px; align-items: end; }
+  .submit-area { text-align: center; margin-top: 28px; }
+  .btn-submit {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 15px 52px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .btn-submit::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .btn-submit:hover { background: #243460; }
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 12px;
+    color: var(--gray-400);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 600px) {
+    .form-row.cols-2, .form-row.cols-3 { grid-template-columns: 1fr; }
+    .sig-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Puyallup Kiwanis Foundation</h1>
+  <p class="sub">Club Grant Submission</p>
+  <div class="header-divider"></div>
+</div>
+<div class="tagline-band">Serving the Children of Puyallup</div>
+
+<div class="container">
+
+  <div class="intro-note">
+    Please fill out to the best of your knowledge. We will reach out if more information is needed.
+  </div>
+
+  <form id="grantForm" novalidate>
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h2>Applicant Organization</h2>
+      </div>
+      <div class="section-body">
+        <div class="form-row cols-2">
+          <div class="field">
+            <label>Organization Name</label>
+            <input type="text" name="org_name" placeholder="Legal name of organization">
+          </div>
+          <div class="field">
+            <label>Organization Type</label>
+            <select name="org_type">
+              <option value="">Select type…</option>
+              <option>501(c)(3) Nonprofit</option>
+              <option>School / School District</option>
+              <option>Service Club</option>
+              <option>Government Agency</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-2">
+          <div class="field">
+            <label>Primary Contact Name</label>
+            <input type="text" name="contact_name" placeholder="First and last name">
+          </div>
+          <div class="field">
+            <label>Title / Role</label>
+            <input type="text" name="contact_title" placeholder="Executive Director, Principal, etc.">
+          </div>
+        </div>
+        <div class="form-row cols-2">
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="(253) 000-0000">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="contact@organization.org">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Mailing Address</label>
+            <input type="text" name="address" placeholder="Street address, City, State, ZIP">
+          </div>
+        </div>
+        <div class="form-row cols-2">
+          <div class="field">
+            <label>EIN / Federal Tax ID <span class="note">(if applicable)</span></label>
+            <input type="text" name="ein" placeholder="XX-XXXXXXX">
+          </div>
+          <div class="field">
+            <label>501(c)(3) / 509(a) Status <span class="note">(if applicable)</span></label>
+            <select name="tax_status">
+              <option value="">Select if applicable…</option>
+              <option>501(c)(3)</option>
+              <option>509(a)</option>
+              <option>Both 501(c)(3) and 509(a)</option>
+              <option>Not applicable</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row cols-3">
+          <div class="field">
+            <label>Estimated # of People Directly Impacted</label>
+            <input type="number" name="people_impacted" min="1" placeholder="e.g. 150">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h2>Project Summary</h2>
+      </div>
+      <div class="section-body">
+        <div class="form-row">
+          <div class="field">
+            <label>Grant / Project Title</label>
+            <input type="text" name="project_title" placeholder="Short descriptive title">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Purpose of Grant</label>
+            <textarea name="project_purpose" placeholder="Briefly describe what this grant will fund and why it is needed."></textarea>
+          </div>
+        </div>
+        <div class="form-row cols-2">
+          <div class="field">
+            <label>Project Type</label>
+            <div class="radio-group">
+              <label><input type="radio" name="project_type" value="specific"> Specific / One-Time</label>
+              <label><input type="radio" name="project_type" value="ongoing"> Ongoing Program</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Project Period</label>
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center">
+              <input type="date" name="period_start">
+              <span style="font-size:13px;color:var(--gray-400);text-align:center">to</span>
+              <input type="date" name="period_end">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h2>Project Director</h2>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Is the Project Director the same as the Primary Contact above?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="same_director" value="yes" onchange="toggleDirector(this)" checked> Yes</label>
+            <label><input type="radio" name="same_director" value="no" onchange="toggleDirector(this)"> No</label>
+          </div>
+        </div>
+        <div id="director-section">
+          <div class="form-row cols-2">
+            <div class="field">
+              <label>Director Name</label>
+              <input type="text" name="director_name" placeholder="First and last name">
+            </div>
+            <div class="field">
+              <label>Title / Role</label>
+              <input type="text" name="director_title" placeholder="Title">
+            </div>
+          </div>
+          <div class="form-row cols-2">
+            <div class="field">
+              <label>Phone</label>
+              <input type="tel" name="director_phone" placeholder="(253) 000-0000">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" name="director_email" placeholder="director@organization.org">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h2>Funding Request</h2>
+      </div>
+      <div class="section-body">
+        <div class="form-row cols-2">
+          <div class="field">
+            <label>Grant Amount Requested</label>
+            <input type="number" name="grant_amount" min="0" step="0.01" placeholder="$0.00">
+          </div>
+          <div class="field">
+            <label>Total Project Cost</label>
+            <input type="number" name="total_project_cost" min="0" step="0.01" placeholder="Full cost including all sources">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h2>Certification &amp; Signature</h2>
+      </div>
+      <div class="section-body">
+        <div class="cert-box">
+          I hereby certify that the information provided in this submission is true and correct to the best of my knowledge, that the organization has authority to submit this grant request, and that any funds received will be used solely for the purposes described herein.
+        </div>
+        <div class="sig-row">
+          <div class="field">
+            <label>Authorized Signature — Printed Name</label>
+            <input type="text" name="sig_name" placeholder="Print full name">
+          </div>
+          <div class="field">
+            <label>Date</label>
+            <input type="date" name="sig_date">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button type="button" class="btn-submit" onclick="submitForm()">Submit</button>
+    </div>
+
+  </form>
+
+  <div class="footer">
+    Puyallup Kiwanis Foundation &nbsp;·&nbsp; PO Box 451, Puyallup, WA 98371
+  </div>
+
+</div>
+
+<script>
+  function toggleDirector(radio) {
+    document.getElementById('director-section').classList.toggle('visible', radio.value === 'no');
+  }
+
+  function getFormData() {
+    const form = document.getElementById('grantForm');
+    const data = {};
+    new FormData(form).forEach((val, key) => { data[key] = val; });
+    ['project_type','same_director'].forEach(name => {
+      const checked = form.querySelector(`[name="${name}"]:checked`);
+      data[name] = checked ? checked.value : '';
+    });
+    return data;
+  }
+
+  function submitForm() {
+    const d = getFormData();
+    const body = `
+PUYALLUP KIWANIS FOUNDATION — CLUB GRANT SUBMISSION
+====================================================
+
+APPLICANT ORGANIZATION
+Organization Name: ${d.org_name || ''}
+Organization Type: ${d.org_type || ''}
+Primary Contact: ${d.contact_name || ''} — ${d.contact_title || ''}
+Phone: ${d.phone || ''}
+Email: ${d.email || ''}
+Address: ${d.address || ''}
+EIN: ${d.ein || 'N/A'}
+Tax Status: ${d.tax_status || 'N/A'}
+People Impacted: ${d.people_impacted || ''}
+
+PROJECT SUMMARY
+Title: ${d.project_title || ''}
+Purpose: ${d.project_purpose || ''}
+Project Type: ${d.project_type || ''}
+Period: ${d.period_start || ''} to ${d.period_end || ''}
+
+PROJECT DIRECTOR
+${d.same_director === 'yes' ? 'Same as primary contact.' : `Name: ${d.director_name || ''}\nTitle: ${d.director_title || ''}\nPhone: ${d.director_phone || ''}\nEmail: ${d.director_email || ''}`}
+
+FUNDING REQUEST
+Grant Amount Requested: $${d.grant_amount || '0'}
+Total Project Cost: $${d.total_project_cost || '0'}
+
+CERTIFICATION
+Signed by: ${d.sig_name || ''}
+Date: ${d.sig_date || ''}
+    `.trim();
+
+    const subject = encodeURIComponent(`PKF Club Grant Submission — ${d.org_name || 'New Submission'}`);
+    const bodyEnc = encodeURIComponent(body);
+    window.location.href = `mailto:ppletcher@ft.newyorklife.com,candjmom@comcast.net?subject=${subject}&body=${bodyEnc}`;
+  }
+</script>
+
+</body>
+</html>
